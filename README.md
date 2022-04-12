@@ -3,6 +3,7 @@
 ### list
 * [자바스크립트 비동기 처리 과정](#자바스크립트-비동기-처리-과정)
 * [함수형 프로그래밍](#함수형-프로그래밍)
+* [얕은 복사와 깊은 복사](#얕은-복사와-깊은-복사)
 
 <br/><br/>
 ===
@@ -40,7 +41,7 @@ WebAPI에서는 callback 함수를 taskQueue에 전달하는데, setTimeout의 c
 
 ![asynchronous](./img/js-asynchronous.png)
 
-<br/><br/><br/>
+<br/><br/>
 **Reference**<br/>
 https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/ <br/>
 https://sculove.github.io/post/javascriptflow/
@@ -106,4 +107,12 @@ console.log(obj); // { a: 2 }
 func 함수를 실행하여 새로운 변수에 리턴받은 객체를 할당했으며, 새로운 객체 obj2의 a 값을 변경하였다. 그랬더니 기존의 obj 객체의 값도 변경이 되었다. 바로 객체의 참조(주소) 값도 같이 복사되어 새롭게 만든 obj2가 변화함에 따라 기존의 obj 객체도 변경되기 때문이다. 이처럼 함수 내에서 직접 값을 변경하지 않았더라도 함수에 들어온 인자값을 그대로 사용하면 순수 함수가 아니다.
 
 <br/><br/>
+▲ [Top](#list)
+
+## 얕은 복사와 깊은 복사
+
+<br/><br/>
+**Reference**<br/>
+[깊은 복사와 얕은 복사에 대한 심도있는 이야기](https://medium.com/watcha/%EA%B9%8A%EC%9D%80-%EB%B3%B5%EC%82%AC%EC%99%80-%EC%96%95%EC%9D%80-%EB%B3%B5%EC%82%AC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%8B%AC%EB%8F%84%EC%9E%88%EB%8A%94-%EC%9D%B4%EC%95%BC%EA%B8%B0-2f7d797e008a) <br/>
+<br/><br/><br/>
 ▲ [Top](#list)
