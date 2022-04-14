@@ -38,7 +38,7 @@ setTimeout
 **자바스크립트 엔진**은 하나의 쓰레드를 가지고 있고, 멀티쓰레드 처럼 보이는 이유는 WebAPI덕분이다.
 자바스크립트를 실행하면 스크립트가 stack에 올라가 작업 순서대로 Call stack에서 실행되고 난 후 삭제되는데, setTimeout, requestAniationFrame, Promise는 WebAPI에게 작업을 요청하고 Call stack에서는 삭제한다.
 WebAPI에서는 callback 함수를 taskQueue에 전달하는데, setTimeout의 callback 함수는 Task Queue, Promise의 callback 함수는 Microtask Queue, 그리고 requestAnimationFrame의 callback함수는 Animation frames에 전달한다.
-그 후 자바스크립트의 Call stack이 비어있으면 Event Loop가 Microtask Queuem - requestAnimationFrame - Task Queue의 순으로 그 안의 작업을 순차적으로 Call stack에 불러와 자바스크립트는 시행한다.
+그 후 자바스크립트의 Call stack이 비어있으면 Event Loop가 Microtask Queue - requestAnimationFrame - Task Queue의 순으로 그 안의 작업을 순차적으로 Call stack에 불러와 자바스크립트는 시행한다.
 
 ![asynchronous](./img/js-asynchronous.png)
 
