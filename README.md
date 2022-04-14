@@ -3,8 +3,8 @@
 ### list
 * [자바스크립트 비동기 처리 과정](#자바스크립트-비동기-처리-과정)
 * [함수형 프로그래밍](#함수형-프로그래밍)
-* [얕은 복사와 깊은 복사](#얕은-복사와-깊은-복사)
 * [Iterable](#iterable)
+* [얕은 복사와 깊은 복사](#얕은-복사와-깊은-복사)
 
 <br/><br/>
 ===
@@ -111,14 +111,6 @@ func 함수를 실행하여 새로운 변수에 리턴받은 객체를 할당했
 ▲ [Top](#list)
 
 <br/><br/>
-## 얕은 복사와 깊은 복사
-
-<br/><br/>
-**Reference**<br/>
-[깊은 복사와 얕은 복사에 대한 심도있는 이야기](https://medium.com/watcha/%EA%B9%8A%EC%9D%80-%EB%B3%B5%EC%82%AC%EC%99%80-%EC%96%95%EC%9D%80-%EB%B3%B5%EC%82%AC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%8B%AC%EB%8F%84%EC%9E%88%EB%8A%94-%EC%9D%B4%EC%95%BC%EA%B8%B0-2f7d797e008a) <br/>
-<br/><br/><br/>
-▲ [Top](#list)
-<br/><br/>
 
 ## Iterable
 반복 가능 객체(iterable object)는 for...of 구문과 함께 ES2015에서 도입되었으며, 다른 객체와의 차이점은 ```Symbol.iterator``` 속성에 특별한 형태의 함수가 들어있다는 것이다.
@@ -211,3 +203,66 @@ function* repeatMany(array) {
 <br/><br/><br/>
 ▲ [Top](#list)
 <br/><br/>
+
+## 얕은 복사와 깊은 복사
+
+### 얕은 복사
+```javascript
+import { equals } from 'ramda';
+const checker = (...args) => console.log(equals(...args));
+
+const arr = [1, 2, 3];
+const copied = arr.slice();
+const copied2 = [...arr]; // spread operator
+const copied3 = Object.assign([], arr);
+
+checker(arr, copied); // true
+checker(arr, copied2); // true
+checker(arr, copied3); // true
+
+const arr2 = [1, 2, [3, 4]];
+const copied4 = arr2.slice();
+const copied5 = [...arr2];
+const copied6 = Object.assign([], arr2);
+
+copied4[2].push(5);
+copied5[2].push(5);
+copied6[2].push(5);
+
+checker(arr2, copied4); // expected false but true
+checker(arr2, copied5); // expected false but true
+checker(arr2, copied6); // expected false but true
+// arr2 === [1, 2, [3, 4, 5]]
+```
+위에서 Array.prototype.slice, Spread Operator, Object.assign는 복사가 가능하긴 했지만 배열안에 객체(배열안의 배열)는 주소값을 복사했기에 얕은 복사가 된 꼴이다.
+
+이보다 좀 더 깊은 복사는 JSON.parse(JSON.stringify(obj))형식으로, Json형식으로 객체 자체를 주소가 아닌 문자 그대로 하나 더 찍어내서 다시 script형식으로 바꾸는 형태이다.
+하지만 이 방법도 Json으로 표현할 수 있는 형식(object, array, number, string, true, false, null)만 가능하다. 즉, 함수나 null 같은 형식은 제대로 복사가 안되거나 에러를 발생시킨다.
+<br/><br/>
+깊은 복사를 제대로 구현하는 방법은 lodash나 ramda를 사용하면 된다.
+```javascript
+const _ = require('lodash');
+const R = require('ramda');
+
+const obj = {
+  f: function(){},
+  b: [BigInt(1)],
+  d: new Date(),
+  u: undefined,
+  t: this,
+  n: [1, 2, [3, 4]]
+};
+
+const copied = _.cloneDeep(obj);
+const copied2 = R.clone(obj);
+```
+lodash는 모든 경우의 수를 일일이 명세해 둔 형태이고, ramda는 모든 경우의수에 대해 추상화를 해 둔 형태라서 가능하다.
+
+<br/><br/>
+**Reference**<br/>
+[깊은 복사와 얕은 복사에 대한 심도있는 이야기](https://medium.com/watcha/%EA%B9%8A%EC%9D%80-%EB%B3%B5%EC%82%AC%EC%99%80-%EC%96%95%EC%9D%80-%EB%B3%B5%EC%82%AC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%8B%AC%EB%8F%84%EC%9E%88%EB%8A%94-%EC%9D%B4%EC%95%BC%EA%B8%B0-2f7d797e008a) <br/>
+[ECMA262](https://tc39.es/ecma262/)
+<br/><br/><br/>
+▲ [Top](#list)
+<br/><br/>
+
