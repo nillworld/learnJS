@@ -1,7 +1,8 @@
 # Learn JS
 
 ### list
-* [자바스크립트 비동기 처리 과정](#자바스크립트-비동기-처리-과정)
+* [비동기 함수](#비동기-함수)
+* [비동기 처리 과정](#비동기-처리-과정)
 * [함수형 프로그래밍](#함수형-프로그래밍)
 * [Iterable](#iterable)
 * [얕은 복사와 깊은 복사](#얕은-복사와-깊은-복사)
@@ -9,8 +10,39 @@
 <br/><br/>
 ===
 <br/><br/>
-## 자바스크립트 비동기 처리 과정
-- 자바스크립트 처리 과정
+## 비동기 함수
+- 콜백함수
+```javascript
+function findUserAndCallBack(id, cb) {
+  setTimeout(function () {
+    console.log("waited 0.1 sec.");
+    const user = {
+      id: id,
+      name: "User" + id,
+      email: id + "@test.com",
+    };
+    cb(user);
+  }, 100);
+}
+
+findUserAndCallBack(1, function (user) {
+  console.log("user:", user);
+});
+```
+- Promise
+- async/await
+
+
+<br/><br/>
+**Reference**<br/>
+https://www.daleseo.com/js-async-callback/
+<br/>
+<br/><br/><br/>
+▲ [Top](#list)
+<br/><br/>
+
+## 비동기 처리 과정
+- 자바스크립트 엔진의 처리 과정
 ```JavaScript
 console.log("script start");
 setTimeout(function() {
