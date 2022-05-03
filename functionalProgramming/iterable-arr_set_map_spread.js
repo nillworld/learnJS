@@ -47,3 +47,5 @@ console.log(map_iterator); //[Map Entries] { [ 'b', 2 ], [ 'c', 3 ] }
 let keys = map.keys(); // iterator를 리턴함. - keys(), values(), entries() 이들 모두 iterator를 가짐
 console.log(keys); //[Map Iterator] { 'a', 'b', 'c' }
 for (const a of keys) console.log(a); // keys가 iterator를 가지므로 동작.
+
+console.log(...[5, 6], ...arr, ...set, ...map, ...map.keys());
