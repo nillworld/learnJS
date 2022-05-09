@@ -1,7 +1,11 @@
 /* 
-- iterable: iterator를 리턴하는 [Symbol.iterator()를 가진 값]
+- iterable: iterator를 리턴하는 [Symbol.iterator]()를 가진 값
+		> arr = [1, 2, 3]
+		> arr[Symbol.iterator] - function ~~ / > arr[Symbol.iterator]() - Array Iterator {};
 - iterator: { value, done } 객체를 리턴하는 next()를 가진 값
+		> arr[Symbol.iterator]().next() - {value: 1, done: false}
 - iterable, iterator 프로토콜: iterable을 for...of, 전개 연산자 등과 함꼐 동작하도록 한 규약
+		> for(const a of arr) console.log(a); - 1 2 3
 */
 
 console.log("Arr --------------------");
@@ -18,6 +22,8 @@ console.log(iterator.next()); // { value: 2, done: false }
 for (const a of arr) console.log(a); // 1 2 3
 for (const a of iterator) console.log("iterator-console 1: ", a); // 3
 for (const a of iterator) console.log("iterator-console 2: ", a); // 안나옴! - next()할게 없어서
+iterator = arr[Symbol.iterator](); // iterator 초기화
+for (const a of iterator) console.log("iterator-console 3: ", a); // 1, 2, 3
 
 /* 
 // arr의 Symbol.iterator를 비우고 log확인
@@ -48,4 +54,6 @@ let keys = map.keys(); // iterator를 리턴함. - keys(), values(), entries() �
 console.log(keys); //[Map Iterator] { 'a', 'b', 'c' }
 for (const a of keys) console.log(a); // keys가 iterator를 가지므로 동작.
 
-console.log(...[5, 6], ...arr, ...set, ...map, ...map.keys());
+console.log("Spread --------------------");
+// 전개연산자 또한 iterator 프로토콜을 이용하여 펼치는 것.
+console.log(...[5, 6], ...arr, ...set, ...map, ...map.keys()); // 5 6 1 2 3 1 2 3 [ 'a', 1 ] [ 'b', 2 ] [ 'c', 3 ] a b c

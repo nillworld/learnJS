@@ -16,8 +16,8 @@ const iterable_custom = {
     };
   },
 };
-
 let iteratorCheck = iterable_custom[Symbol.iterator]();
+console.log("Symbol.iterator를 실행한 값은 자기 자신 - ", iteratorCheck[Symbol.iterator]() === iteratorCheck); // true
 console.log(iteratorCheck.next()); // { value: 3, done: false }
 console.log(iteratorCheck.next()); // { value: 2, done: false }
 
