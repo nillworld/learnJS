@@ -9,7 +9,7 @@ const products = [
 const filter = (f, iter) => {
   let res = [];
   for (const a of iter) {
-    if (f(a)) res.push(a);
+    if (f(a)) res.push(a); // filter 조건을 함수(f(a))에 위임.
   }
   return res;
 };
