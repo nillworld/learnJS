@@ -1,7 +1,10 @@
 const iterable_custom = {
+  // iterable 값은 Symbol iterator 메소드를 구현하고 있어야 함
   [Symbol.iterator]() {
     let i = 3;
+    // Symbol iterator 메소드는 iterator를 반환 해야함
     return {
+      // iterator는 next를 메소드로 가지고 있음
       next() {
         return i === 0 ? { done: true } : { value: i--, done: false };
       },
@@ -35,3 +38,29 @@ console.log(iteratorCheck.next()); // { done: true }
 		for( const a of ex) log(a);
 		log(ex[Symbol.iterator]());
 */
+
+console.log("==================================================");
+
+const myIterator = {
+  num: 0,
+  [Symbol.iterator]() {
+    let num = this.num;
+    return {
+      next() {
+        return num === 0 ? { done: true } : { value: num--, done: false };
+      },
+      [Symbol.iterator]() {
+        return this;
+      },
+    };
+  },
+};
+
+myIterator.num = 3;
+let iterTest = myIterator[Symbol.iterator]();
+console.log(iterTest.next());
+console.log(iterTest.next());
+console.log(iterTest.next());
+console.log(iterTest[Symbol.iterator]() === iterTest);
+
+for (const a of myIterator) console.log(a);
