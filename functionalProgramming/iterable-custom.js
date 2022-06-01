@@ -65,22 +65,22 @@ console.log(iterTest[Symbol.iterator]() === iterTest);
 
 for (const a of myIterator) console.log(a);
 
-// iterator함수안에서 규칙을 다시 설정 할 수 있는 'f'를 구현해 보고자 했지만 아직 안됨.
+console.log("==================================================");
 
 const myIterator2 = {
   min: 0,
   max: 0,
-  f(a) {
-    return a * 2;
+  f(min) {
+    return min * 2;
   },
   [Symbol.iterator]() {
     let min = this.min;
     let max = this.max;
-    let f = this.f(min);
+    let f = this.f;
     return {
       next() {
-        console.log(f, max);
-        return f > max ? { done: true } : { value: min++, done: false, f: f, max: max };
+        // console.log(f(min), max);
+        return f(min) > max ? { done: true } : { value: min++, done: false };
       },
       [Symbol.iterator]() {
         return this;
@@ -89,10 +89,11 @@ const myIterator2 = {
   },
 };
 myIterator2.min = 10;
-myIterator2.max = 11;
-// myIterator2.f = function () {
-//   return myIterator2.max;
+myIterator2.max = 25;
+// myIterator2.f = function (min) {
+//   return min * 1;
 // };
+for (const a of myIterator2) console.log(a);
 
 let test = myIterator2[Symbol.iterator]();
 console.log(test.next());
