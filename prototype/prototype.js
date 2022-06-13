@@ -2,6 +2,7 @@ console.log("Object property names", Object.getOwnPropertyNames(Object));
 console.log("Object.prototype property names", Object.getOwnPropertyNames(Object.prototype));
 console.log("Array property names", Object.getOwnPropertyNames(Array));
 console.log("Array.prototype property names", Object.getOwnPropertyNames(Array.prototype));
+console.log("Array.prototype property symbol", Object.getOwnPropertySymbols(Array.prototype));
 console.log(
   "Array.prototype property[Symbol.iterator] names",
   Object.getOwnPropertyNames(Array.prototype[Symbol.iterator])
