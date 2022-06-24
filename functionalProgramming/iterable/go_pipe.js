@@ -11,6 +11,8 @@ const reduce = (f, acc, iter) => {
 
 const add = (a, b) => a + b;
 
+// function go(iterable argument){ return reduce() }
+/// function reduce(argument, function){ return function(argument), iterable argument }
 const go = (...args) => reduce((a, f) => f(a), args);
 const pipe =
   (f, ...fs) =>
