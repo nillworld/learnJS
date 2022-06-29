@@ -23,3 +23,33 @@ console.log(
     (a) => a * 100
   )
 );
+
+const pipe =
+  (...pipe_args) =>
+  (...test5_args) =>
+    "pipe_args: " + pipe_args + "  test5_args: " + test5_args;
+
+const test5 = pipe(1, 2, 3);
+
+console.log("test5(3, 2, 1)");
+console.log(test5(3, 2, 1));
+console.log("test5(3, 2, 1)");
+
+const f = (a) => (b) => {
+  console.log(a / b);
+};
+
+function f2(a) {
+  return function subFunction(b) {
+    console.log(a / b);
+  };
+}
+
+const topF = f(10);
+const topF2 = f2(10);
+
+topF(2);
+topF2(2);
+
+function aa() {}
+var aa = function () {};

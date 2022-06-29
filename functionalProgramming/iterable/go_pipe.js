@@ -1,4 +1,5 @@
 const reduce = (f, acc, iter) => {
+  console.log(f);
   if (!iter) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;
@@ -12,25 +13,24 @@ const reduce = (f, acc, iter) => {
 const add = (a, b) => a + b;
 
 // function go(iterable argument){ return reduce() }
-/// function reduce(argument, function){ return function(argument), iterable argument }
+/// function reduce(function, arguments){ return function(argument), iterable argument }
 const go = (...args) => reduce((a, f) => f(a), args);
 const pipe =
   (f, ...fs) =>
   (...as) =>
     go(f(...as), ...fs);
-
 console.log(
   go(
-    add(0, 1),
+    0,
     (a) => a + 10,
     (a) => a + 100
   )
 ); //111
 
-const f = pipe(
+const fuc = pipe(
   (a, b) => a + b,
   (a) => a + 10,
   (a) => a + 100
 );
 
-console.log(f(0, 1)); // 111
+console.log(fuc(0, 1)); // 111
