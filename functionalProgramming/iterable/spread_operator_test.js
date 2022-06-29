@@ -5,9 +5,21 @@ const test = (a, ...b) => {
 
 test(4, 2, 1, 5, "2,4", "e");
 
-const test2 = (a, f) => {
-  console.log(f(a));
-};
+const test2 = (a, f) => f(a);
 
-test2(10, (n) => n * 10); // 100
-test2((n) => n * 10, 10); // f is not a function
+console.log(test2(10, (n) => n * 10)); // 100
+// test2((n) => n * 10, 10); // f is not a function
+
+const test3 = (a, ...fs) => {
+  for (const f of fs) {
+    a = f(a);
+  }
+  return a;
+};
+console.log(
+  test3(
+    5,
+    (a) => a * 2,
+    (a) => a * 100
+  )
+);
