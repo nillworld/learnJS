@@ -66,3 +66,12 @@ const reduce = (f, acc, iter) => {
 
 let test = reduce((a, f) => f(a), [0, (a) => a + 10, (a) => a + 100]);
 console.log(test);
+
+const arr = [10, 43, 32];
+const sum = arr.reduce((a, b) => a + b, 0);
+const sum2 = arr.reduce((a, b) => {
+  console.log("<sum2> a: ", a, "b: ", b);
+  return a + b;
+});
+console.log("sum: ", sum);
+console.log("sum2: ", sum2);

@@ -25,5 +25,15 @@ const reduce = (f, acc, iter) => {
 
 ```javaScript
 const iterF = [(a) => a + 1, (a) => a + 10, (a) => a + 100];
-reduce((a, f) => f(a), 0, iterF);
+reduce((a, f) => f(a), 0, iterF); // 111
 ```
+
+- 여기서 헷갈릴 수 있는게 `reduce(function, acc, iter)`에서 function에 해당하는게 `(a, f)=>f(a)`이고 이때 `f`는 `iterF`의 인자 하나( `a=>a+1` )이고, a는 누산기이다.
+
+## 내장 Method - reduce
+
+```javascript
+arr.reduce(callback(accumulator, currentValue[, currentIndex, array]) [, initialValue])
+```
+
+- `accumulator`: 누산기. 콜백의 반환값을 누적. 만약 `initialValue`가 없다면
