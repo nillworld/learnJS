@@ -57,12 +57,31 @@ console.log(price_sum); // 60000
 
 const price_sum2 = products.reduce((acc, product) => acc + product.price);
 console.log(price_sum2); // [object Object]2000025000
+
+const price_sum3 = products.map((product) => product.price).reduce((acc, price) => acc + price);
+console.log(price_sum3); // 60000
 ```
 
 - `price_sum2`에서 처음으로 callback되었을 때 `acc`는 product의 첫번째 인자값이 되기 때문에 `[object Object]`가 넣어져서 위와 같은 결과가 된다.
+- `price_sum3`과 같이 map함수로 미리 걸러주고 reduce 써도 좋음.
 
 ```javascript
 const functions = [(a) => a + 10, (a) => a + 100, (a) => a + 1000];
 const functions_reduce = functions.reduce((a, f) => f(a), 0);
 console.log(functions_reduce); // 1110
+```
+
+```javascript
+const names = ["Alice", "Bob", "Tiff", "Bruce", "Alice"];
+
+const countedNames = names.reduce(function (allNames, name) {
+  if (name in allNames) {
+    allNames[name]++;
+  } else {
+    allNames[name] = 1;
+  }
+  return allNames;
+}, {});
+console.log(countedNames);
+// { 'Alice': 2, 'Bob': 1, 'Tiff': 1, 'Bruce': 1 }
 ```

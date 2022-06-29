@@ -82,8 +82,49 @@ const products = [
   { name: "바지", price: 25000 },
 ];
 const price_sum = products.reduce((acc, product) => acc + product.price);
+const price_sum2 = products.map((product) => product.price).reduce((acc, price) => acc + price);
 console.log(price_sum);
+console.log(price_sum2);
 
 const functions = [(a) => a + 10, (a) => a + 100, (a) => a + 1000];
 const functions_reduce = functions.reduce((a, f) => f(a), 0);
 console.log(functions_reduce);
+
+const people = [
+  { name: "Alice", age: 21 },
+  { name: "Max", age: 20 },
+  { name: "Jane", age: 20 },
+];
+
+const groupByAge = people.reduce((groupByAgeObj, person) => {
+  if (groupByAgeObj[person.age]) {
+    groupByAgeObj[person.age].push(person);
+  } else {
+    groupByAgeObj[person.age] = [person];
+  }
+  return groupByAgeObj;
+}, {});
+console.log(groupByAge);
+
+// 좀더 가용성 있게 함수 정의
+const groupBy = (objectArray, property) =>
+  objectArray.reduce((acc, obj) => {
+    const key = obj[property];
+    if (!acc[key]) {
+      acc[key] = [obj];
+    } else {
+      acc[key].push(obj);
+    }
+    return acc;
+  }, {});
+
+const groupedPeople = groupBy(people, "age");
+console.log(groupedPeople);
+
+// {
+//   20: [
+//     { name: 'Max', age: 20 },
+//     { name: 'Jane', age: 20 }
+//   ],
+//   21: [{ name: 'Alice', age: 21 }]
+// }
