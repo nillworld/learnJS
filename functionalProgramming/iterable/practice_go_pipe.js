@@ -75,3 +75,15 @@ const sum2 = arr.reduce((a, b) => {
 });
 console.log("sum: ", sum);
 console.log("sum2: ", sum2);
+
+const products = [
+  { name: "반팔티", price: 15000 },
+  { name: "긴팔티", price: 20000 },
+  { name: "바지", price: 25000 },
+];
+const price_sum = products.reduce((acc, product) => acc + product.price);
+console.log(price_sum);
+
+const functions = [(a) => a + 10, (a) => a + 100, (a) => a + 1000];
+const functions_reduce = functions.reduce((a, f) => f(a), 0);
+console.log(functions_reduce);
