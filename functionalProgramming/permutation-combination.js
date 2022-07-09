@@ -69,14 +69,19 @@ let combination = getCombination(uniqueArr, 3);
 
 const getPermutation = (array, n) => {
   let result = [];
+
+  if (n === 1) return array.map((el) => [el]);
+
   array.forEach((a, i, arr) => {
-    if (n === 1) return arr.map((el) => [el]);
-    const cutArr = arr.splice(i, 1);
-    const subPermutation = getPermutation(cutArr, n - 1);
-    result = subPermutation.map((el) => [...el, a]);
+    const copyArr = [...arr];
+    copyArr.splice(i, 1);
+    const subPermutation = getPermutation(copyArr, n - 1);
+    const addPermutation = subPermutation.map((el) => [...el, a]);
+    result.push(...addPermutation);
   });
   return result;
 };
-let testP = [1, 2, 3];
-let permutation = getPermutation(testP, 2);
+
+let testP = [1, 2, 3, 5];
+let permutation = getPermutation(testP, 3);
 console.log(permutation);
