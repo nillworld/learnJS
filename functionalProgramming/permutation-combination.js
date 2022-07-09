@@ -62,4 +62,21 @@ let dupArr = [1, 4, 3, 4, 2, 3, 7];
 let set = new Set(dupArr);
 let uniqueArr = [...set];
 let combination = getCombination(uniqueArr, 3);
-console.log(combination);
+// console.log(combination);
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+const getPermutation = (array, n) => {
+  let result = [];
+  array.forEach((a, i, arr) => {
+    if (n === 1) return arr.map((el) => [el]);
+    const cutArr = arr.splice(i, 1);
+    const subPermutation = getPermutation(cutArr, n - 1);
+    result = subPermutation.map((el) => [...el, a]);
+  });
+  return result;
+};
+let testP = [1, 2, 3];
+let permutation = getPermutation(testP, 2);
+console.log(permutation);
