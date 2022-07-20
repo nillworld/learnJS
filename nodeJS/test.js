@@ -16,3 +16,14 @@ j.function();
 
 var moduleTest = require("./moduleTest.js");
 moduleTest();
+
+//---------------------------
+// json assign test
+
+const k = () => {
+  return { a: 4, b: 3 };
+};
+
+let test1 = k();
+let test2 = Object.assign(test1, { e: 2 });
+console.log(test2);
