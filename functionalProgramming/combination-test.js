@@ -22,18 +22,19 @@ console.log(getCombination([1, 2, 3], 2));
 const getPermutation = (arr, n) => {
   const result = [];
 
-  if (n === 1) return arr.map((el) => [el]);
+  if (n === 1) return arr.map((el) => [el]); // [b, c] => [[b],[c]]
 
   // getPermutation(n)=[[a, ...getPermutation(n-1)],[b, ...getPermutation(n-1)],[...] ...]
   arr.forEach((a, i, array) => {
     const copyArr = [...array];
-    copyArr.splice(i, 1);
-    const subPermutation = getPermutation(copyArr, n - 1);
-    const addPermutation = subPermutation.map((el) => [a, ...el]);
+    copyArr.splice(i, 1); // b c
+    const subPermutation = getPermutation(copyArr, n - 1); // [b],[c] => b, c
+    const addPermutation = subPermutation.map((el) => [a, ...el]); //[a, b],[a, c]
+
     result.push(...addPermutation);
   });
 
   return result;
 };
 
-console.log(getPermutation([1, 2, 3], 2));
+console.log(getPermutation(["a", "b", "c"], 2));
