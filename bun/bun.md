@@ -21,3 +21,16 @@
 docker pull jarredsumner/bun:edge
 docker run --rm --init --ulimit memlock=-1:-1 jarredsumner/bun:edge
 ```
+
+- 이거 안됨,,
+
+or
+
+```sh
+docker build -t bun .
+docker run -e BUN_INSTALL=$HOME/.bun -e PATH=$BUN_INSTALL/bin:$PATH --name bun bu
+```
+
+---
+
+volume으로 설치 해 봐야 하나...?
