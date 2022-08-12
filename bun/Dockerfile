@@ -1,4 +1,5 @@
 FROM ubuntu:22.04
+WORKDIR /app
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y \
@@ -9,5 +10,5 @@ RUN set -x \
 	# && rm -rf /var/lib/apt/lists/* \
 # ENV BUN_INSTALL="$HOME/.bun"
 COPY path.sh .
-RUN /path.sh
+RUN ./path.sh
 # ENV PATH="$BUN_INSTALL/bin:$PATH"
