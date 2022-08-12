@@ -8,3 +8,16 @@
 - SQLite client가 내장되어 있음.
 - Node-API의 90%를 지원(fs, path 등 많은 모듈을 지원)
 - Bun은 Zig언어로 작성되어 빠름 (Zig는 수동 메모리 관리 기능이 있는 언어로, 때론 Rust보다 빠르고 '더 나은 C언어'로 불려지기도 함)
+
+## RUN
+
+### native
+
+`curl -fsSL https://bun.sh/install | bash`
+
+### Docker
+
+```sh
+docker pull jarredsumner/bun:edge
+docker run --rm --init --ulimit memlock=-1:-1 jarredsumner/bun:edge
+```
