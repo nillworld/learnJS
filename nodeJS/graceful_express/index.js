@@ -1,8 +1,15 @@
 const express = require("express");
+const fs = require("fs");
 
 const app = express();
 
-app.get("/", (req, res) => res.json({ ping: true }));
+app.get("/", (req, res) => {
+  fs.cpSync("test1", "test4", {
+    recursive: true,
+    force: true,
+  });
+  return res.json({ ping: true });
+});
 
 const server = app.listen(3000, () => console.log("Running…"));
 
@@ -31,8 +38,8 @@ function shutDown() {
   setTimeout(() => {
     console.error("Could not close connections in time, forcefully shutting down");
     process.exit(1);
-  }, 30000);
+  }, 10000);
 
   connections.forEach((curr) => curr.end());
-  setTimeout(() => connections.forEach((curr) => curr.destroy()), 10000);
+  setTimeout(() => connections.forEach((curr) => curr.destroy()), 5000);
 }
