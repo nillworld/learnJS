@@ -59,14 +59,18 @@ const test3 = () => {
   console.log("GET SIGINT");
   server.close();
 
+  console.log("Server Closed");
+
   count += 1;
 
   if (connections.length === 0) {
+    console.log("Process Exit");
     return process.exit(1);
   }
 
   if (count === 2) {
-    console.log("SIGKILL");
+    console.log("GET SIGKILL");
+    console.log("Process Exit");
     return process.exit(1);
   }
 
@@ -78,7 +82,7 @@ const test3 = () => {
   setInterval(() => {
     console.log("Connect count: ", connections.length);
     if (connections.length === 0) {
-      console.log("연결 없어서 끝냄");
+      console.log("처리 중인 작업이 끝남. 프로세스 종료.");
 
       process.exit(0);
     }
