@@ -51,7 +51,7 @@ server.on("request", (req, res) => {
       setTimeout(() => {
         console.log("Work completed");
         resolve();
-      }, 500000);
+      }, 5000);
     });
     ongoingWork.push(workPromise);
     workPromise.then(() => {
