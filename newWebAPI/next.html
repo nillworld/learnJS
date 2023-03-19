@@ -1,12 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
     <title>Document</title>
+    <style>
+      @keyframes grow-x {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+
+      @keyframes shrink-x {
+        from {
+          transform: scaleX(1);
+        }
+        to {
+          transform: scaleX(0);
+        }
+      }
+
+      ::view-transition-old(figure-caption),
+      ::view-transition-new(figure-caption) {
+        height: auto;
+        right: 0;
+        left: auto;
+        transform-origin: right center;
+      }
+
+      ::view-transition-old(figure-caption) {
+        animation: 0.25s linear both shrink-x;
+      }
+
+      ::view-transition-new(figure-caption) {
+        animation: 0.25s 0.25s linear both grow-x;
+      }
+    </style>
   </head>
   <body>
     <img src="2023-03-19-23-57-30.png" alt="" />
+    <h1>Test page</h1>
   </body>
 </html>
